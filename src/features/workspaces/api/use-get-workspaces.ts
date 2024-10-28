@@ -7,3 +7,4 @@ export const useGetWorkspaces = () => {
   const isLoading = data === undefined;
   return { data, isLoading };
 }
+
