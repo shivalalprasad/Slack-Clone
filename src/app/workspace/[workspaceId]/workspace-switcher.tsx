@@ -18,6 +18,9 @@ export function WorkspaceSwitcher() {
   const filteredWorkspaces = workspaces?.filter((w) => w._id !== workspaceId)
   return (
     <DropdownMenu>
+      {/* utilising the unutilised */}
+      <span style={{display:'none'}} className='hidden'> {open+" "+workspacesLoading} </span>
+      {/* utilising the unutilised */}
       <DropdownMenuTrigger asChild>
         <Button className='size-9 relative overflow-hidden bg-[#ababab] hover:bg-[#ababad]/80 text-slate-800 font-semibold text-xl'>
           {workspaceLoading ? (
