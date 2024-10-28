@@ -12,6 +12,7 @@ export default function WorkSpaceIPage() {
        Workspace id: {JSON.stringify(data?._id)}<br/>
        Join Code: {JSON.stringify(data?.joinCode)}<br/>
        Userid: {JSON.stringify(data?.userId)} <br/>
+       {/* // return <div>WorkSpaceIPage</div> */}
     </div>
   );
 }
