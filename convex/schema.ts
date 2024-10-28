@@ -1,16 +1,16 @@
 import { defineSchema,
-  // defineTable
+  defineTable
  } from 'convex/server'
 import { authTables } from '@convex-dev/auth/server'
-// import { v } from 'convex/values'
+import { v } from 'convex/values'
 
 const schema = defineSchema({
   ...authTables,
-  // workspaces: defineTable({
-  //   name: v.string(),
-  //   userId: v.id('users'),
-  //   joinCode: v.string()
-  // }),
+  workspaces: defineTable({
+    name: v.string(),
+    userId: v.id('users'),
+    joinCode: v.string()
+  }),
   // members: defineTable({
   //   userId: v.id('users'),
   //   workspaceId: v.id('workspaces'),
