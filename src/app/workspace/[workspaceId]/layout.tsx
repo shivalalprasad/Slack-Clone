@@ -1,5 +1,7 @@
 'use client';
 
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@/components/ui/resizable'
+import WorkspaceSidebar from './workspace-sidebar'
 import Sidebar from './sidebar';
 import Toolbar from './toolbar'
 interface WorkspaceLayoutProps {
@@ -11,7 +13,13 @@ export default function WorkspaceLayout({ children }: WorkspaceLayoutProps) {
       <Toolbar />
       <div className='flex h-[calc(100vh-40px)]'>
         <Sidebar />
-        {children}
+        <ResizablePanelGroup direction='horizontal' autoSaveId='ca-workspace-layout'>
+          <ResizablePanel defaultSize={20} minSize={11} className='bg-[#5e2c5f]'>
+            <WorkspaceSidebar />
+          </ResizablePanel>
+          <ResizableHandle />
+          <ResizablePanel minSize={20}>{children}</ResizablePanel>
+        </ResizablePanelGroup>
       </div>
     </div>
   )
