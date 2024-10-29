@@ -9,12 +9,18 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Doc } from '../../../../convex/_generated/dataModel'
+import PreferencesModal from './preferences-modal'
+import { useState } from 'react'
 interface WorkspaceHeaderProps {
   workspace: Doc<'workspaces'>
   isAmin: boolean
 }
 export default function WorkspaceHeader({ workspace, isAmin }: WorkspaceHeaderProps) {
+  const [preferencesOpen, setPreferencesOpen] = useState(false)
   return (
+    <>
+    <PreferencesModal open={preferencesOpen} setOpen={setPreferencesOpen} initialValue={workspace.name} />
+
     <div className='flex items-center justify-between px-4 h-[49px] gap-0.5'>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -42,7 +48,7 @@ export default function WorkspaceHeader({ workspace, isAmin }: WorkspaceHeaderPr
                 Invite people to {workspace.name}
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className='cursor-pointer py-2' onClick={() => {}}>
+              <DropdownMenuItem className='cursor-pointer py-2' onClick={() => setPreferencesOpen(true)}>
                 Preferences
               </DropdownMenuItem>
             </>
@@ -62,5 +68,6 @@ export default function WorkspaceHeader({ workspace, isAmin }: WorkspaceHeaderPr
         </Hint>
       </div>
     </div>
+    </>
   )
 }
