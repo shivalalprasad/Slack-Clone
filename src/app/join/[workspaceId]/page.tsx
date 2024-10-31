@@ -52,7 +52,6 @@ export default function JoinWorkspaceIdPage() {
           <p className='text-md text-muted-foreground'>Enter the workspacee code to join</p>
         </div>
         <VerificationInput
-        disabled='false'
           onComplete={handleComplate}
           length={6}
           classNames={{
