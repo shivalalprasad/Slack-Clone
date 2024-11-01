@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { MessageSquareTextIcon, Pencil, Smile, Trash } from 'lucide-react'
+
 import { Button } from './ui/button'
 import Hint from './hint'
 import { EmojiPopover } from './emoji-popover'
+
 interface ToolbarProps {
   isAuthor: boolean
   isPending: boolean
@@ -12,6 +14,7 @@ interface ToolbarProps {
   handleReaction: (value:string) => void
   hideThreadButton?: boolean
 }
+
 export default function Toolbar({
   isAuthor,
   isPending,
@@ -37,18 +40,18 @@ export default function Toolbar({
           </Hint>
         )}
         {isAuthor && (
-          <>
           <Hint label='Edit message'>
-            <Button variant='ghost' size='iconSm' disabled={isPending}>
+            <Button variant='ghost' size='iconSm' disabled={isPending} onClick={handleEdit}>
               <Pencil className='size-4' />
             </Button>
           </Hint>
+        )}
+        {isAuthor && (
           <Hint label='Delete message'>
-            <Button variant='ghost' size='iconSm' disabled={isPending}>
+            <Button variant='ghost' size='iconSm' disabled={isPending} onClick={handleDelete}>
               <Trash className='size-4' />
             </Button>
           </Hint>
-          </>
         )}
       </div>
     </div>
