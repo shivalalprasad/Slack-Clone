@@ -8,11 +8,14 @@ import useConfirm from '@/hooks/use-confirm'
 
 import { useUpdateMessage } from '@/features/messages/api/use-update-message'
 import { useRemoveMessage } from '@/features/messages/api/use-remove-message'
+import { useToggleReaction } from '@/features/reactions/api/use-toggle-reaction'
 
 import Hint from './hint'
 import Toolbar from './toolbar'
+import Reactions from './reactions'
 import { Thumbnail } from './thumbnail'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+
 import { Doc, Id } from '../../convex/_generated/dataModel'
 
 const Renderer = dynamic(() => import('@/components/renderer'), { ssr: false })
@@ -76,8 +79,20 @@ export function Message({
 
   const { mutate: updateMessage, isPending: isUpdatingMessage } = useUpdateMessage()
   const { mutate: removeMessage, isPending: isRemovingMessage } = useRemoveMessage()
+  const { mutate: toggleReaction, isPending: isTogglingReaction } = useToggleReaction()
 
   const isPending = isUpdatingMessage || isRemovingMessage
+
+  const handleReaction = (value: string) => {
+    toggleReaction(
+      { value, messageId: id },
+      {
+        onError: () => {
+          toast.error('Failed to toggle reaction')
+        }
+      }
+    )
+  }
 
   const handleDelete = async () => {
     const ok = await confirm()
@@ -146,6 +161,7 @@ export function Message({
                 <Renderer value={body} />
                 <Thumbnail url={image} />
                 {updatedAt && <span className='text-xs text-muted-foreground'>(edited)</span>}
+                <Reactions data={reactions} onChange={handleReaction} />
               </div>
             )}
           </div>
@@ -156,7 +172,7 @@ export function Message({
               handleEdit={() => setIsEditingId(id)}
               handleThread={() => {}}
               handleDelete={handleDelete}
-              handleReaction={() => {}}
+              handleReaction={handleReaction}
               hideThreadButton={hideThreadButton}
             />
           )}
@@ -210,6 +226,7 @@ export function Message({
               <Renderer value={body} />
               <Thumbnail url={image} />
               {updatedAt && <span className='text-xs text-muted-foreground'>(edited)</span>}
+              <Reactions data={reactions} onChange={handleReaction} />
             </div>
           )}
         </div>
@@ -220,7 +237,7 @@ export function Message({
             handleEdit={() => setIsEditingId(id)}
             handleThread={() => {}}
             handleDelete={handleDelete}
-            handleReaction={() => {}}
+            handleReaction={handleReaction}
             hideThreadButton={hideThreadButton}
           />
         )}
