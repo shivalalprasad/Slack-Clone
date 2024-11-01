@@ -115,7 +115,7 @@ export function MessageList({
             { threshold: 1.0 }
           )
 
-          observer.observe(el)
+          observer.observe(el ?? document.createElement('div'))
 
           return () => observer.disconnect()
         }}
