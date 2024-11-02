@@ -18,6 +18,7 @@ import { Thumbnail } from './thumbnail'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 
 import { Doc, Id } from '../../convex/_generated/dataModel'
+import ThreadBar from './thread-bar'
 
 const Renderer = dynamic(() => import('@/components/renderer'), { ssr: false })
 const Editor = dynamic(() => import('@/components/editor'), { ssr: false })
@@ -44,6 +45,7 @@ interface MessageProps {
   hideThreadButton?: boolean
   threadCount?: number
   threadImage?: string
+  threadName?: string
   threadTimestamp?: number
 }
 
@@ -71,6 +73,7 @@ export function Message({
   hideThreadButton,
   threadCount,
   threadImage,
+  threadName,
   threadTimestamp
 }: MessageProps) {
   const { onOpenMessage, onClose, parentMessageId } = usePanel()
@@ -167,6 +170,13 @@ export function Message({
                 <Thumbnail url={image} />
                 {updatedAt && <span className='text-xs text-muted-foreground'>(edited)</span>}
                 <Reactions data={reactions} onChange={handleReaction} />
+                <ThreadBar
+                  count={threadCount}
+                  image={threadImage}
+                  name={threadName}
+                  timestamp={threadTimestamp}
+                  onClick={() => onOpenMessage(id)}
+                />
               </div>
             )}
           </div>
@@ -232,6 +242,13 @@ export function Message({
               <Thumbnail url={image} />
               {updatedAt && <span className='text-xs text-muted-foreground'>(edited)</span>}
               <Reactions data={reactions} onChange={handleReaction} />
+              <ThreadBar
+                count={threadCount}
+                image={threadImage}
+                name={threadName}
+                timestamp={threadTimestamp}
+                onClick={() => onOpenMessage(id)}
+              />
             </div>
           )}
         </div>
