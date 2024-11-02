@@ -15,8 +15,10 @@ import WorkspaceHeader from './workspace-header'
 import SidebarItem from './sidebar-item'
 import WorkspaceSection from './workspace-section'
 import UserItem from './user-item'
+import { useMemberId } from '@/hooks/use-member-id'
 
 export default function WorkspaceSidebar() {
+  const memberId = useMemberId()
   const workspaceId = useWorkspaceId()
   const channelId = useChannelId()
   const [open, setOpen] = useCreateChannelModal()
@@ -61,7 +63,7 @@ export default function WorkspaceSidebar() {
         onNew={() => console.log('new direct message')}
       >
         {members?.map((item) => (
-          <UserItem key={item._id} id={item._id} label={item.user.name} image={item.user.image} />
+          <UserItem key={item._id} id={item._id} label={item.user.name} image={item.user.image} variant={memberId === member._id ? 'active' : 'default'} />
         ))}
       </WorkspaceSection>
     </div>
