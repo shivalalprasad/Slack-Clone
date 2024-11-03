@@ -251,7 +251,7 @@ export default function Thread({ messageId, onClose }: ThreadProps) {
         />
       </div>
       <div className='px-4'>
-        <Editor key={editorKey} onSubmit={handleSubmit} disabled={false} placeholder='Reply...' />
+        <Editor key={editorKey} onSubmit={handleSubmit} disabled={isPending} placeholder='Reply...' />
       </div>
     </div>
   )
