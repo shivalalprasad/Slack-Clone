@@ -19,7 +19,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Slack Clone - by Shivalal Prasad",
+  title: "Slack Clone - by Tanya Singh",
   icons:'/favicon.png',
 };
 
